@@ -1,4 +1,6 @@
-(executable
- (public_name tree_visual)
- (name main)
- (libraries tree_visual))
+(executables
+ (public_names tree_visual tree_visual_js)
+ (names main mainjs)
+ (modes exe js)
+ (preprocess (pps js_of_ocaml-ppx))
+ (libraries tree_visual js_of_ocaml))

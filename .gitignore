@@ -27,3 +27,7 @@ setup.log
 
 # Local OPAM switch
 _opam/
+
+
+# dune build bin/mainjs.bc.js --build-dir _js
+_js/
