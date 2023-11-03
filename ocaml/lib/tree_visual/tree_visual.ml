@@ -1,5 +1,5 @@
-(* open Ds_stack *)
-open Ds_queue
+open Ds_stack
+(* open Ds_queue *)
 
 let string_of_data = Ds.string_of_d ~peek ~pop
 

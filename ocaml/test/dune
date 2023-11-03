@@ -1,2 +1,10 @@
 (test
- (name tree_visual))
+ (name test)
+ (libraries tree_visual_))
+
+(rule
+ (with-stdout-to data.out (run ./test.exe)))
+
+(rule
+ (alias runtest)
+ (action (diff data.expected data.out)))

@@ -15,6 +15,7 @@ depends: [
   "js_of_ocaml-compiler"
   "js_of_ocaml"
   "js_of_ocaml-ppx"
+  "ppx_inline_test" {with-test}
   "odoc" {with-doc}
 ]
 build: [

@@ -1,0 +1,5 @@
+(library
+ (name tree_visual_)
+ (inline_tests)
+ (libraries tree_visual)
+ (preprocess (pps ppx_inline_test)))
