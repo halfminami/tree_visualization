@@ -19,7 +19,7 @@
  (name tree_visual)
  (synopsis "A short synopsis")
  (description "A longer description")
- (depends ocaml dune js_of_ocaml-compiler js_of_ocaml js_of_ocaml-ppx (ppx_inline_test :with-test))
+ (depends ocaml dune js_of_ocaml-compiler js_of_ocaml js_of_ocaml-ppx (ppx_inline_test :with-test) (ppx_assert :with-test))
  (tags
   (topics "to describe" your project)))
 
