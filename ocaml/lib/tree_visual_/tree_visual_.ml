@@ -11,7 +11,7 @@ let%test_unit "many (queue)" =
   let run_test = Test_func.create ~pop ~push ~peek ~map:(fun x -> x) in
   Test_func.many_test ~init ~run_test
 
-let%test_unit "order" =
+let%test_unit "stack and queue order" =
   let li = [ 0; 1; 2; 3; 4 ] in
   let st = ref @@ Data_structure.Stack.init () in
   let qu = ref @@ Data_structure.Queue.init () in
@@ -32,3 +32,26 @@ let%test_unit "order" =
 
   [%test_result: string] (string_of_stack !st) ~expect:(string_of_queue !qu)
     ~message:"queue order is reversed stack"
+
+let test_tree0 =
+  [
+    [];
+    [ 4; 5 ];
+    [];
+    [ 6; 7 ];
+    [];
+    [ 8 ];
+    [];
+    [ 9; 10; 11; 12; 0 ];
+    [];
+    [];
+    [];
+    [];
+    [];
+    [ 1; 2; 3 ];
+  ]
+
+let%test_unit "find root" =
+  match Tree_visual.find_root test_tree0 with
+  | None -> Test_func.fail "should find root"
+  | Some i -> [%test_result: int] i ~expect:13 ~message:"root is 13"
