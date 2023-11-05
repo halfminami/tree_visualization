@@ -34,22 +34,22 @@ let%test_unit "stack and queue order" =
     ~message:"queue order is reversed stack"
 
 let test_tree0 =
-  [
-    [];
-    [ 4; 5 ];
-    [];
-    [ 6; 7 ];
-    [];
-    [ 8 ];
-    [];
-    [ 9; 10; 11; 12; 0 ];
-    [];
-    [];
-    [];
-    [];
-    [];
-    [ 1; 2; 3 ];
-  ]
+  [|
+    [||];
+    [| 4; 5 |];
+    [||];
+    [| 6; 7 |];
+    [||];
+    [| 8 |];
+    [||];
+    [| 9; 10; 11; 12; 0 |];
+    [||];
+    [||];
+    [||];
+    [||];
+    [||];
+    [| 1; 2; 3 |];
+  |]
 
 let%test_unit "find root" =
   match Tree_visual.find_root test_tree0 with

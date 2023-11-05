@@ -1,4 +1,4 @@
-type inputs = int list list
+type inputs = int array array
 
 type outputs = {
   vertices : (int * int) list;
