@@ -12,14 +12,16 @@ type vertex = {
   right : int ref;
   height : int;
   parent : int option;
+  pos : (int * int) ref;
 }
 
 let none_tree =
   {
     name = 0;
     children = [||];
-    left = ref ~-1;
-    right = ref ~-1;
+    left = ref 0;
+    right = ref 0;
     height = 0;
     parent = None;
+    pos = ref (0, 0);
   }
