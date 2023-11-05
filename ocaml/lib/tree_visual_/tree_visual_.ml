@@ -1,6 +1,9 @@
 open! Base
 open! Stdlib
 
+let string_of_d = Test_func.string_of_d
+let string_of_tree = Test_func.string_of_tree
+
 let%test_unit "many (stack)" =
   let open Data_structure.Stack in
   let run_test = Test_func.create ~pop ~push ~peek ~map:List.rev in
@@ -21,12 +24,12 @@ let%test_unit "stack and queue order" =
 
   let string_of_stack =
     let open Data_structure.Stack in
-    let f ts ds = Data_structure.string_of_d ~peek ~pop ds ts in
+    let f ts ds = string_of_d ~peek ~pop ds ts in
     f string_of_int
   in
   let string_of_queue =
     let open Data_structure.Queue in
-    let f ts ds = Data_structure.string_of_d ~peek ~pop ds ts in
+    let f ts ds = string_of_d ~peek ~pop ds ts in
     f string_of_int
   in
 
@@ -52,6 +55,6 @@ let test_tree0 =
   |]
 
 let%test_unit "find root" =
-  match Tree_visual.find_root test_tree0 with
+  match Tree_visual.find_root_opt test_tree0 with
   | None -> Test_func.fail "should find root"
   | Some i -> [%test_result: int] i ~expect:13 ~message:"root is 13"

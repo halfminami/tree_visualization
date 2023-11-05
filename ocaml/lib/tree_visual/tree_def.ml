@@ -7,8 +7,11 @@ type outputs = {
 
 type vertex = {
   name : int;
-  children : vertex list;
+  children : vertex array;
   left : int ref;
   right : int ref;
-  parent : vertex;
+  parent : int option;
 }
+
+let none_tree =
+  { name = 0; children = [||]; left = ref ~-1; right = ref ~-1; parent = None }

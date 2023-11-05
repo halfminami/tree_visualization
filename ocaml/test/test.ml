@@ -8,15 +8,22 @@ let () =
          qu := Data_structure.Queue.push x !qu);
   let string_of_stack =
     let open Data_structure.Stack in
-    let f ts ds = Data_structure.string_of_d ~peek ~pop ds ts in
+    let f ts ds = Tree_visual_.string_of_d ~peek ~pop ds ts in
     f string_of_int
   in
   let string_of_queue =
     let open Data_structure.Queue in
-    let f ts ds = Data_structure.string_of_d ~peek ~pop ds ts in
+    let f ts ds = Tree_visual_.string_of_d ~peek ~pop ds ts in
     f string_of_int
   in
   print_endline "stack is:";
   print_endline @@ string_of_stack !st;
   print_endline "queue is:";
-  print_endline @@ string_of_queue !qu
+  print_endline @@ string_of_queue !qu;
+
+  print_endline "create tree";
+  let tree = Tree_visual_.test_tree0 in
+  let mem = Array.make (Array.length tree) Tree_visual.none_tree in
+  print_endline
+    (Tree_visual.make_tree (Tree_visual.find_root tree) tree mem
+    |> Tree_visual_.string_of_tree)
