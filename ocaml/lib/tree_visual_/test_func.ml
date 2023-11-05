@@ -36,6 +36,17 @@ let string_of_d ~peek ~pop =
   in
   to_string
 
-let rec string_of_tree ({ name; children; _ } : Tree_visual.vertex_t) =
-  Printf.sprintf "%s =>(%s)" (string_of_int name)
+let rec string_of_tree
+    ({
+       name;
+       children;
+       left = { contents = l };
+       right = { contents = r };
+       height;
+       _;
+     } :
+      Tree_visual.vertex_t) =
+  (* name:<height>[left|right] =>(children) *)
+  Printf.sprintf "%s:<%s>[%s|%s] =>(%s)" (string_of_int name)
+    (string_of_int height) (string_of_int l) (string_of_int r)
     (Array.map string_of_tree children |> Array.to_list |> String.concat ", ")

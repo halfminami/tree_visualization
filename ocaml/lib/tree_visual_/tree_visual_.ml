@@ -54,7 +54,35 @@ let test_tree0 =
     [| 1; 2; 3 |];
   |]
 
-let%test_unit "find root" =
+let test_tree1 =
+  [|
+    [| 1 |];
+    [| 2 |];
+    [| 3; 4; 5 |];
+    [| 6 |];
+    [| 7 |];
+    [| 8 |];
+    [| 9; 10; 11 |];
+    [||];
+    [| 12; 13 |];
+    [||];
+    [||];
+    [||];
+    [||];
+    [||];
+  |]
+
+let cnt = 0
+let sub a = Printf.sprintf "find root (%s)" @@ string_of_int a
+
+let%test_unit [%name sub cnt] =
   match Tree_visual.find_root_opt test_tree0 with
   | None -> Test_func.fail "should find root"
   | Some i -> [%test_result: int] i ~expect:13 ~message:"root is 13"
+
+let cnt = cnt + 1
+
+let%test_unit [%name sub cnt] =
+  match Tree_visual.find_root_opt test_tree1 with
+  | None -> Test_func.fail "should find root"
+  | Some i -> [%test_result: int] i ~expect:0 ~message:"root is 0"

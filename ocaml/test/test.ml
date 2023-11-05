@@ -22,8 +22,15 @@ let () =
   print_endline @@ string_of_queue !qu;
 
   print_endline "create tree";
+  let run tree =
+    let mem = Array.make (Array.length tree) Tree_visual.none_tree in
+    print_endline
+      (Tree_visual.make_tree (Tree_visual.find_root tree) tree mem
+      |> Tree_visual_.string_of_tree)
+  in
   let tree = Tree_visual_.test_tree0 in
-  let mem = Array.make (Array.length tree) Tree_visual.none_tree in
-  print_endline
-    (Tree_visual.make_tree (Tree_visual.find_root tree) tree mem
-    |> Tree_visual_.string_of_tree)
+  print_endline "test_tree0";
+  run tree;
+  let tree = Tree_visual_.test_tree1 in
+  print_endline "test_tree1";
+  run tree
