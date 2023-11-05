@@ -23,7 +23,7 @@ let () =
 
   print_newline ();
   print_endline "create tree:";
-  let create tree = Tree_visual.make_tree (Tree_visual.find_root tree) tree in
+  let create tree = Tree_visual.make_tree tree (Tree_visual.find_root tree) in
   let run tree =
     print_endline (create tree |> Tree_visual_.string_of_tree_nhlrc)
   in
@@ -46,5 +46,21 @@ let () =
   let tree = Tree_visual_.test_tree1 in
   print_endline "test_tree1";
   run tree;
+
+  print_newline ();
+  print_endline "main:";
+  let run tree = Tree_visual.main tree in
+  let prints arr2 =
+    arr2
+    |> Array.map (fun (x, y) ->
+           Printf.sprintf "(%s, %s)" (string_of_int x) (string_of_int y))
+    |> Array.to_list |> String.concat ", " |> print_endline
+  in
+  let tree = Tree_visual_.test_tree0 in
+  print_endline "test_tree0";
+  prints (run tree).vertices;
+  let tree = Tree_visual_.test_tree1 in
+  print_endline "test_tree1";
+  prints (run tree).vertices;
 
   ()

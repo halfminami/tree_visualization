@@ -1,9 +1,5 @@
 type inputs = int array array
-
-type outputs = {
-  vertices : (int * int) list;
-  edges : ((int * int) * (int * int)) list;
-}
+type outputs = { vertices : (int * int) array }
 
 type vertex = {
   name : int;
