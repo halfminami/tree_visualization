@@ -36,7 +36,7 @@ let string_of_d ~peek ~pop =
   in
   to_string
 
-let rec string_of_tree
+let rec string_of_tree_nhlrc
     ({
        name;
        children;
@@ -49,4 +49,15 @@ let rec string_of_tree
   (* name:<height>[left|right] =>(children) *)
   Printf.sprintf "%s:<%s>[%s|%s] =>(%s)" (string_of_int name)
     (string_of_int height) (string_of_int l) (string_of_int r)
-    (Array.map string_of_tree children |> Array.to_list |> String.concat ", ")
+    (Array.map string_of_tree_nhlrc children
+    |> Array.to_list |> String.concat ", ")
+
+let rec string_of_tree_npc
+    ({ name; children; pos = { contents = pos }; _ } : Tree_visual.vertex_t) =
+  (* name:{x,y} =>(children) *)
+  match pos with
+  | x, y ->
+      Printf.sprintf "%s:{%s,%s} =>(%s)" (string_of_int name) (string_of_int x)
+        (string_of_int y)
+        (Array.map string_of_tree_npc children
+        |> Array.to_list |> String.concat ", ")

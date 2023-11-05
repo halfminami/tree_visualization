@@ -2,7 +2,8 @@ open! Base
 open! Stdlib
 
 let string_of_d = Test_func.string_of_d
-let string_of_tree = Test_func.string_of_tree
+let string_of_tree_nhlrc = Test_func.string_of_tree_nhlrc
+let string_of_tree_npc = Test_func.string_of_tree_npc
 
 let%test_unit "many (stack)" =
   let open Data_structure.Stack in
