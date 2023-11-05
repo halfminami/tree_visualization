@@ -3,7 +3,7 @@
   import viteLogo from '/vite.svg'
   import Counter from './lib/Counter.svelte'
 
-  console.log(treeGrid.main()())
+  // console.log(treeGrid.main()())
 </script>
 
 <main>
