@@ -10,7 +10,7 @@ let find_root ar =
   | None -> failwith "could not find root: input may not be a tree"
   | Some a -> a
 
-let make_tree (d : int) (nodes : Tree_def.inputs) mem =
+let make_tree (d : int) (nodes : Tree_def.inputs) =
   let rec down nodes_index l par h =
     let chs =
       Array.make (Array.length nodes.(nodes_index)) Tree_def.none_tree
@@ -39,7 +39,6 @@ let make_tree (d : int) (nodes : Tree_def.inputs) mem =
         pos = ref (l, h);
       }
     in
-    mem.(nodes_index) <- v;
     (v, !maxl)
   in
 

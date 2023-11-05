@@ -23,10 +23,7 @@ let () =
 
   print_newline ();
   print_endline "create tree:";
-  let create tree =
-    let mem = Array.make (Array.length tree) Tree_visual.none_tree in
-    Tree_visual.make_tree (Tree_visual.find_root tree) tree mem
-  in
+  let create tree = Tree_visual.make_tree (Tree_visual.find_root tree) tree in
   let run tree =
     print_endline (create tree |> Tree_visual_.string_of_tree_nhlrc)
   in
