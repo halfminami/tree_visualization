@@ -1,8 +1,10 @@
-import './app.css';
+// import './app.css';
 import App from './App.svelte';
 
 declare global {
-  var treeGrid: any;
+  var treeGrid: {
+    main: () => (_: number[][]) => { vertices: [number, number][] };
+  };
 }
 
 const app = new App({

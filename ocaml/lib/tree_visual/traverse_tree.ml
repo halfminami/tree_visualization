@@ -51,7 +51,7 @@ let align_center (top : Tree_def.vertex) =
           else !(a.right)
         in
 
-        let posx = minl + ((maxr - minl) / 2) in
+        let posx = minl +. ((maxr -. minl) /. 2.) in
         a.pos := (posx, a.height));
     st := Stack.pop !st
   done;

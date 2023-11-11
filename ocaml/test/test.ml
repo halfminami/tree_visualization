@@ -53,7 +53,7 @@ let () =
   let prints arr2 =
     arr2
     |> Array.map (fun (x, y) ->
-           Printf.sprintf "(%s, %s)" (string_of_int x) (string_of_int y))
+           Printf.sprintf "(%s, %s)" (string_of_float x) (string_of_float y))
     |> Array.to_list |> String.concat ", " |> print_endline
   in
   let tree = Tree_visual_.test_tree0 in

@@ -21,7 +21,7 @@ let make_tree (nodes : Tree_def.inputs) (d : int) =
            (* parent with only one child is not changing its width;
               else since maxl is updating, add 1 *)
            let ret =
-             down x (!maxl + if k = 0 then 0 else 1) nodes_index (h + 1)
+             down x (!maxl +. if k = 0 then 0. else 1.) nodes_index (h +. 1.)
            in
            match ret with
            | v, vl ->
@@ -42,4 +42,4 @@ let make_tree (nodes : Tree_def.inputs) (d : int) =
     (v, !maxl)
   in
 
-  match down d 0 ~-1 0 with v, _ -> v
+  match down d 0. ~-1 0. with v, _ -> v

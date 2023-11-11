@@ -1,23 +1,26 @@
+type x_t = float
+type y_t = float
+type pos_t = x_t * y_t
 type inputs = int array array
-type outputs = { vertices : (int * int) array }
+type outputs = { vertices : pos_t array }
 
 type vertex = {
   name : int;
   children : vertex array;
-  left : int ref;
-  right : int ref;
-  height : int;
+  left : x_t ref;
+  right : x_t ref;
+  height : y_t;
   parent : int option;
-  pos : (int * int) ref;
+  pos : pos_t ref;
 }
 
 let none_tree =
   {
     name = 0;
     children = [||];
-    left = ref 0;
-    right = ref 0;
-    height = 0;
+    left = ref 0.;
+    right = ref 0.;
+    height = 0.;
     parent = None;
-    pos = ref (0, 0);
+    pos = ref (0., 0.);
   }

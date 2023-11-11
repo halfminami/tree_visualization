@@ -8,7 +8,7 @@ let make_tree = Create_tree.make_tree
 let align_center = Traverse_tree.align_center
 
 let main ar : Tree_def.outputs =
-  let arr = Array.make (Array.length ar) (0, 0) in
+  let arr : Tree_def.pos_t array = Array.make (Array.length ar) (0., 0.) in
 
   let rec down (node : vertex_t) =
     arr.(node.name) <- !(node.pos);

@@ -48,7 +48,7 @@ let rec string_of_tree_nhlrc
       Tree_visual.vertex_t) =
   (* name:<height>[left|right] =>(children) *)
   Printf.sprintf "%s:<%s>[%s|%s] =>(%s)" (string_of_int name)
-    (string_of_int height) (string_of_int l) (string_of_int r)
+    (string_of_float height) (string_of_float l) (string_of_float r)
     (Array.map string_of_tree_nhlrc children
     |> Array.to_list |> String.concat ", ")
 
@@ -57,7 +57,7 @@ let rec string_of_tree_npc
   (* name:{x,y} =>(children) *)
   match pos with
   | x, y ->
-      Printf.sprintf "%s:{%s,%s} =>(%s)" (string_of_int name) (string_of_int x)
-        (string_of_int y)
+      Printf.sprintf "%s:{%s,%s} =>(%s)" (string_of_int name)
+        (string_of_float x) (string_of_float y)
         (Array.map string_of_tree_npc children
         |> Array.to_list |> String.concat ", ")
