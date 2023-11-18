@@ -14,17 +14,18 @@
   $: maxX = Math.max(...nodePoss.map((item) => item[0]));
   $: maxY = Math.max(...nodePoss.map((item) => item[1]));
 
-  $: console.log(treeObj);
-
-  function getCenter(pos: [number, number]) {
-    return [(pos[0] + 0.5) * $rectWidth, (pos[1] + 0.5) * $rectHeight];
+  function getCenter(pos: [number, number], w: number, h: number) {
+    return [(pos[0] + 0.5) * w, (pos[1] + 0.5) * h];
   }
+
+  export let self;
 </script>
 
 <svg
   viewBox="0 0 {(maxX + 1) * $rectWidth} {(maxY + 1) * $rectHeight}"
   width={(maxX + 1) * $rectWidth}
   height={(maxY + 1) * $rectHeight}
+  bind:this={self}
 >
   <style>
     .vertice {
@@ -45,8 +46,8 @@
     {@const parentPos = nodePoss[parentChild[0]]}
     {@const childPos = nodePoss[parentChild[1]]}
 
-    {@const parentP = getCenter(parentPos)}
-    {@const childP = getCenter(childPos)}
+    {@const parentP = getCenter(parentPos, $rectWidth, $rectHeight)}
+    {@const childP = getCenter(childPos, $rectWidth, $rectHeight)}
 
     <path
       class="edge"
@@ -54,13 +55,13 @@
     />
   {/each}
   {#each nodePoss as pos}
-    {@const p = getCenter(pos)}
+    {@const p = getCenter(pos, $rectWidth, $rectHeight)}
     <circle class="vertice" cx={p[0]} cy={p[1]} r={$circleR} />
   {/each}
   {#each $names as s, i}
     {@const pos = nodePoss[i]}
     {#if pos}
-      {@const p = getCenter(pos)}
+      {@const p = getCenter(pos, $rectWidth, $rectHeight)}
       <text
         class="text"
         x={p[0]}
