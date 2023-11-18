@@ -40,9 +40,16 @@
     [1, 2, 3],
   ];
 
-  $: nodePoss = window.treeGrid.main()(ins).vertices;
+  $: treeObj = window.treeGrid.main()(ins);
+  $: nodePoss = treeObj.vertices;
+  $: edgeIndexs = treeObj.edges;
   $: maxX = Math.max(...nodePoss.map((item) => item[0]));
   $: maxY = Math.max(...nodePoss.map((item) => item[1]));
+
+  $: console.log(treeObj);
+  function getCenter(pos: [number, number]) {
+    return [(pos[0] + 0.5) * $rectWidth, (pos[1] + 0.5) * $rectHeight];
+  }
 </script>
 
 <svg
@@ -51,21 +58,34 @@
   height={(maxY + 1) * $rectHeight}
 >
   <style>
+    .vertice {
+      fill: white;
+      stroke: black;
+      stroke-width: 2;
+    }
+    .edge {
+      fill: transparent;
+      stroke: black;
+      stroke-width: 2;
+    }
   </style>
-  {#each nodePoss as pos}
-    <circle
-      class="vertice"
-      cx={(pos[0] + 0.5) * $rectWidth}
-      cy={(pos[1] + 0.5) * $rectHeight}
-      r={$circleR}
+  {#each edgeIndexs as parentChild}
+    {@const parentPos = nodePoss[parentChild[0]]}
+    {@const childPos = nodePoss[parentChild[1]]}
+
+    {@const parentP = getCenter(parentPos)}
+    {@const childP = getCenter(childPos)}
+
+    <path
+      class="edge"
+      d="M{parentP[0]} {parentP[1]}, L{childP[0]} {childP[1]}"
     />
+  {/each}
+  {#each nodePoss as pos}
+    {@const p = getCenter(pos)}
+    <circle class="vertice" cx={p[0]} cy={p[1]} r={$circleR} />
   {/each}
 </svg>
 
 <style>
-  .vertice {
-    fill: white;
-    stroke: black;
-    stroke-width: 2;
-  }
 </style>

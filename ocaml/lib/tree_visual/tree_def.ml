@@ -2,7 +2,7 @@ type x_t = float
 type y_t = float
 type pos_t = x_t * y_t
 type inputs = int array array
-type outputs = { vertices : pos_t array }
+type outputs = { vertices : pos_t array; edges : (int * int) array }
 
 type vertex = {
   name : int;

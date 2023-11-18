@@ -9,10 +9,15 @@ let _ =
          map2 Array.map Js.to_array Js.to_array ar
          (* |> map2 List.map Array.to_list Array.to_list *)
          |> Tree_visual.main
-         |> fun { vertices } ->
+         |> fun { vertices; edges } ->
          object%js
            val vertices =
              vertices
+             |> Array.map (fun (a, b) -> [| a; b |])
+             |> map2 Js.array_map Js.array Js.array
+
+           val edges =
+             edges
              |> Array.map (fun (a, b) -> [| a; b |])
              |> map2 Js.array_map Js.array Js.array
          end

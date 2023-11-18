@@ -9,11 +9,13 @@ let align_center = Traverse_tree.align_center
 
 let main ar : Tree_def.outputs =
   let arr : Tree_def.pos_t array = Array.make (Array.length ar) (0., 0.) in
+  let li = ref [] in
 
-  let rec down (node : vertex_t) =
+  let rec down (node : vertex_t) d =
     arr.(node.name) <- !(node.pos);
-    node.children |> Array.iter down
+    if d <> -1 then li := (d, node.name) :: !li;
+    node.children |> Array.iter (fun x -> down x node.name)
   in
 
-  find_root ar |> make_tree ar |> align_center |> down;
-  { vertices = arr }
+  (find_root ar |> make_tree ar |> align_center |> fun x -> down x ~-1);
+  { vertices = arr; edges = Array.of_list !li }

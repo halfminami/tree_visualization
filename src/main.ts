@@ -3,7 +3,10 @@ import App from './App.svelte';
 
 declare global {
   var treeGrid: {
-    main: () => (_: number[][]) => { vertices: [number, number][] };
+    main: () => (_: number[][]) => {
+      vertices: [number, number][];
+      edges: [number, number][];
+    };
   };
 }
 
