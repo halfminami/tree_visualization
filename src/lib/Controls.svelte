@@ -1,5 +1,7 @@
 <script lang="ts">
-  import WrapRange from './WrapRange.svelte';
+  import DescLink from '../comp/DescLink.svelte';
+  import WrapRange from '../comp/WrapRange.svelte';
+  import WrapTextarea from '../comp/WrapTextarea.svelte';
   import {
     rectWidth,
     rectHeight,
@@ -8,9 +10,17 @@
     names,
     adjacent,
     idCntr,
+    descTextWidth,
+    descCircleR,
+    descRectWidth,
+    descRectHeight,
+    descAdjacent,
+    descNames,
+    descDownload,
+    descEdges,
   } from './service';
 
-  export let svgEl: SVGSVGElement | null = null;
+  export let svgEl: SVGSVGElement;
   let adjacentValue = stringOfAdjacent($adjacent);
   let namesValue = $names.join('\n');
   $: $adjacent = parseAdjacent(adjacentValue);
@@ -41,6 +51,7 @@
         lab="text width is"
         step={1}
         bind:value={$textWidth}
+        desc={$descTextWidth}
       />
     </div>
     <div class="col">
@@ -49,6 +60,7 @@
         lab="circle radius is"
         step={1}
         bind:value={$circleR}
+        desc={$descCircleR}
       />
     </div>
   </div>
@@ -59,6 +71,7 @@
         lab="rect width is"
         bind:value={$rectWidth}
         max={150}
+        desc={$descRectWidth}
       />
     </div>
     <div class="col">
@@ -67,55 +80,59 @@
         lab="rect height is"
         bind:value={$rectHeight}
         max={150}
+        desc={$descRectHeight}
       />
     </div>
   </div>
   <div class="row">
-    {#if adjacentValue != undefined}
-      {@const id = idCntr.get()}
-      <label for={id} class="form-label">input adjacent nodes</label>
-      <textarea {id} bind:value={adjacentValue} class="form-control" />
-    {/if}
+    <WrapTextarea
+      id={idCntr.get()}
+      lab="input adjacent nodes"
+      bind:value={adjacentValue}
+      desc={$descAdjacent}
+    />
   </div>
   <div class="row">
-    {#if namesValue != undefined}
-      {@const id = idCntr.get()}
-      <label for={id} class="form-label">input nodes names</label>
-      <textarea {id} bind:value={namesValue} class="form-control" />
-    {/if}
+    <WrapTextarea
+      id={idCntr.get()}
+      lab="input nodes names"
+      bind:value={namesValue}
+      desc={$descNames}
+    />
   </div>
   <!-- pass edges and create adjacent nodes list -->
   <!-- input examples -->
   {#if svgEl}
     <div class="row">
-      <button
-        class="btn btn-primary mx-2"
-        style="width:fit-content"
-        on:click|preventDefault={() => {
-          if (svgEl) {
-            const bl = new Blob(
-              [
-                new XMLSerializer()
-                  .serializeToString(svgEl)
-                  .replace(
-                    /\<svg.*?\>/,
-                    svgPre(
-                      `${svgEl.viewBox.baseVal.x} ${svgEl.viewBox.baseVal.y} ${svgEl.viewBox.baseVal.width} ${svgEl.viewBox.baseVal.height}`
-                    )
-                  ),
-              ],
-              { type: 'image/svg+xml;charset=utf-8' }
-            );
-            const url = URL.createObjectURL(bl);
-
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'download.svg';
-            a.click();
-            a.remove();
-          }
-        }}>download svg</button
-      >
+      <div class="col">
+        <button
+          class="btn btn-primary"
+          style="width:fit-content"
+          on:click|preventDefault={() => {
+            if (svgEl) {
+              const bl = new Blob(
+                [
+                  new XMLSerializer()
+                    .serializeToString(svgEl)
+                    .replace(
+                      /\<svg.*?\>/,
+                      svgPre(
+                        `${svgEl.viewBox.baseVal.x} ${svgEl.viewBox.baseVal.y} ${svgEl.viewBox.baseVal.width} ${svgEl.viewBox.baseVal.height}`
+                      )
+                    ),
+                ],
+                { type: 'image/svg+xml;charset=utf-8' }
+              );
+              const url = URL.createObjectURL(bl);
+              const a = document.createElement('a');
+              a.href = url;
+              a.download = 'download.svg';
+              a.click();
+              a.remove();
+            }
+          }}>download svg</button
+        ><DescLink id={$descDownload} className="ms-2" />
+      </div>
     </div>
   {/if}
 </div>

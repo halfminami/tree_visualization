@@ -18,7 +18,8 @@
     return [(pos[0] + 0.5) * w, (pos[1] + 0.5) * h];
   }
 
-  export let self;
+  export let self: SVGSVGElement;
+  export let labelledBy: string;
 </script>
 
 <svg
@@ -26,6 +27,7 @@
   width={(maxX + 1) * $rectWidth}
   height={(maxY + 1) * $rectHeight}
   bind:this={self}
+  aria-labelledby={labelledBy}
 >
   <style>
     .vertice {

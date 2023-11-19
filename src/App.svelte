@@ -5,6 +5,7 @@
   import { adjacent, names, idCntr } from './lib/service';
 
   const formId = idCntr.get();
+  const headingId = idCntr.get();
 
   const ins = [
     [1],
@@ -48,7 +49,9 @@
 </script>
 
 <header class="navbar bg-body-tertiary shadow-sm">
-  <div class="container-fluid"><span class="navbar-brand">Tree SVG</span></div>
+  <div class="container-fluid">
+    <span class="navbar-brand" id={headingId}>Tree SVG</span>
+  </div>
 </header>
 
 <main class="container my-5">
@@ -56,7 +59,7 @@
     <h1>Draw Tree with SVG</h1>
     <div class="m-auto" style="width: fit-content;">
       <output form={formId}>
-        <DrawTree bind:self={svgEl} />
+        <DrawTree bind:self={svgEl} labelledBy={headingId} />
       </output>
     </div>
   </section>
