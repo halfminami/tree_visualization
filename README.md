@@ -1,6 +1,6 @@
 # Visualize Tree
 
-Draws undirected tree into SVG.
+Draws tree into an SVG file.
 
 ## Uses
 
