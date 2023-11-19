@@ -42,10 +42,31 @@
   adjacent.set(ins);
   names.set(namesStr);
   let svgEl: SVGSVGElement;
-  $: console.log(svgEl);
 </script>
 
-<main>
-  <section><DrawTree bind:self={svgEl} /></section>
-  <section><Controls bind:svgEl /></section>
+<header class="navbar bg-body-tertiary shadow-sm">
+  <div class="container-fluid"><span class="navbar-brand">Tree SVG</span></div>
+</header>
+
+<main class="container my-5">
+  <section>
+    <h1>Draw Tree with SVG</h1>
+    <div class="m-auto" style="width: fit-content;">
+      <DrawTree bind:self={svgEl} />
+    </div>
+  </section>
+  <section>
+    <h1>Edit the Tree</h1>
+    <Controls bind:svgEl />
+  </section>
 </main>
+
+<section class="container my-5"><h1>Description</h1></section>
+
+<footer class="navbar bg-primary-subtle mt-5">
+  <nav>
+    <ul class="nav">
+      <li class="navi-item"><a href="#" class="nav-link">this repo</a></li>
+    </ul>
+  </nav>
+</footer>
