@@ -1,4 +1,5 @@
 <script lang="ts">
+  import WrapRange from './WrapRange.svelte';
   import {
     rectWidth,
     rectHeight,
@@ -6,6 +7,7 @@
     textWidth,
     names,
     adjacent,
+    idCntr,
   } from './service';
 
   export let svgEl: SVGSVGElement | null = null;
@@ -27,7 +29,6 @@
   function stringOfAdjacent(l: number[][]) {
     return l.map((item) => item.join(' ')).join('\n');
   }
-
   const svgPre = (viewBox: string) =>
     `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="${viewBox}">`;
 </script>
@@ -35,82 +36,62 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col">
-      <label
-        >text width is <output>{$textWidth}px</output><input
-          type="range"
-          bind:value={$textWidth}
-          min="1"
-          max="100"
-        /></label
-      >
+      <WrapRange
+        id={idCntr.get()}
+        lab="text width is"
+        step={1}
+        bind:value={$textWidth}
+      />
     </div>
     <div class="col">
-      <label
-        >rect width is <output>{$rectWidth}</output><input
-          type="range"
-          bind:value={$rectWidth}
-          min="1"
-          max="150"
-        /></label
-      >
+      <WrapRange
+        id={idCntr.get()}
+        lab="circle radius is"
+        step={1}
+        bind:value={$circleR}
+      />
     </div>
   </div>
   <div class="row">
     <div class="col">
-      <label
-        >rect height is <output>{$rectHeight}</output><input
-          type="range"
-          bind:value={$rectHeight}
-          min="1"
-          max="150"
-        /></label
-      >
+      <WrapRange
+        id={idCntr.get()}
+        lab="rect width is"
+        bind:value={$rectWidth}
+        max={150}
+      />
     </div>
     <div class="col">
-      <label
-        >circle radius is <output>{$circleR}</output><input
-          type="range"
-          bind:value={$circleR}
-          min="1"
-          max="100"
-        /></label
-      >
+      <WrapRange
+        id={idCntr.get()}
+        lab="rect height is"
+        bind:value={$rectHeight}
+        max={150}
+      />
     </div>
   </div>
   <div class="row">
-    <label
-      >input adjacent nodes<textarea
-        bind:value={adjacentValue}
-        class="form-control"
-      /></label
-    >
+    {#if adjacentValue != undefined}
+      {@const id = idCntr.get()}
+      <label for={id} class="form-label">input adjacent nodes</label>
+      <textarea {id} bind:value={adjacentValue} class="form-control" />
+    {/if}
   </div>
   <div class="row">
-    <label
-      >input nodes names<textarea
-        bind:value={namesValue}
-        class="form-control"
-      /></label
-    >
+    {#if namesValue != undefined}
+      {@const id = idCntr.get()}
+      <label for={id} class="form-label">input nodes names</label>
+      <textarea {id} bind:value={namesValue} class="form-control" />
+    {/if}
   </div>
   <!-- pass edges and create adjacent nodes list -->
+  <!-- input examples -->
   {#if svgEl}
     <div class="row">
       <button
         class="btn btn-primary mx-2"
         style="width:fit-content"
-        on:click={() => {
-          console.log(
-            svgEl &&
-              new XMLSerializer()
-                .serializeToString(svgEl)
-                .replace(
-                  /\<svg.*?\>/,
-                  svgPre(
-                    `${svgEl.viewBox.baseVal.x} ${svgEl.viewBox.baseVal.y} ${svgEl.viewBox.baseVal.width} ${svgEl.viewBox.baseVal.height}`
-                  )
-                )
-          );
+        on:click|preventDefault={() => {
           if (svgEl) {
             const bl = new Blob(
               [
