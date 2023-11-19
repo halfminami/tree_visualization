@@ -8,7 +8,17 @@
     adjacent,
   } from './service';
 
-  $: treeObj = window.treeGrid.main()($adjacent);
+  $: treeObj = (() => {
+    let r: { vertices: [number, number][]; edges: [number, number][] };
+    try {
+      r = window.treeGrid.main()($adjacent);
+    } catch (e) {
+      r = { vertices: [[0, 0]], edges: [] };
+      // TODO: inform the input is invalid
+      console.log('maybe the tree is invalid');
+    }
+    return r;
+  })();
   $: nodePoss = treeObj.vertices;
   $: edgeIndexs = treeObj.edges;
   $: maxX = Math.max(...nodePoss.map((item) => item[0]));

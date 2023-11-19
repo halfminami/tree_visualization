@@ -22,14 +22,25 @@ export function makeAdjacent(
       namesToIndx.set(item[1], namesToIndx.size);
       right = namesToIndx.get(item[1])!;
     }
-    adjacentNodes[left].push(right);
-    adjacentNodes[right].push(left);
+    if (adjacentNodes[left] && adjacentNodes[right]) {
+      adjacentNodes[left].push(right);
+      adjacentNodes[right].push(left);
+    } else {
+      throw new Error('the tree may not be connected');
+    }
   });
 
   const idx = namesToIndx.get(head);
-  if (adjacentNodes.length != namesToIndx.size || idx == undefined) {
+  if (adjacentNodes.length > namesToIndx.size) {
     // not a tree
-    return { names: ['0'], adjacent: [[]] };
+    // return { names: ['0'], adjacent: [[]] };
+    throw new Error('the tree may not be connected');
+  }
+  if (adjacentNodes.length < namesToIndx.size) {
+    throw new Error('the tree may have a loop');
+  }
+  if (idx == undefined) {
+    throw new Error('head node must exist');
   }
 
   // map -> array
