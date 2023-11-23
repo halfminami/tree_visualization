@@ -1,5 +1,6 @@
 <script lang="ts">
   import DescLink from './comp/DescLink.svelte';
+  import ResizableHeight from './comp/ResizableHeight.svelte';
   import Controls from './lib/Controls.svelte';
   import Description from './lib/Description.svelte';
   import DrawTree from './lib/DrawTree.svelte';
@@ -7,6 +8,9 @@
 
   const formId = idCntr.get();
   const headingId = idCntr.get();
+
+  let resizeHeight: number | undefined;
+  $: console.log(resizeHeight);
 
   let svgEl: SVGSVGElement;
 </script>
@@ -20,11 +24,18 @@
 <main class="container my-5">
   <section>
     <h1>Draw Tree with SVG <DescLink id={$descSvg} /></h1>
-    <div class="m-auto my-3 svgwrap">
-      <output form={formId} class="svg m-auto d-block">
-        <DrawTree bind:self={svgEl} labelledBy={headingId} />
-      </output>
-    </div>
+    <ResizableHeight class="m-auto my-3" bind:height={resizeHeight}>
+      <div
+        class="svgwrap"
+        style="height:{resizeHeight == undefined
+          ? '50svh'
+          : `${resizeHeight}px`};"
+      >
+        <output form={formId} class="svg m-auto d-block">
+          <DrawTree bind:self={svgEl} labelledBy={headingId} />
+        </output>
+      </div>
+    </ResizableHeight>
   </section>
   <section>
     <h1>Edit the Tree</h1>
@@ -34,10 +45,12 @@
   </section>
 </main>
 
-<section class="container my-5">
-  <h1>Description</h1>
-  <Description />
-</section>
+<aside>
+  <section class="container my-5">
+    <h1>Description</h1>
+    <Description />
+  </section>
+</aside>
 
 <footer class="navbar bg-primary-subtle mt-5">
   <nav>
@@ -59,7 +72,7 @@
   }
   .svgwrap {
     background-color: ghostwhite;
-    height: 70svh;
+    /* height: 100%; */
     width: 100%;
     overflow: auto;
   }
