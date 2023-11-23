@@ -66,7 +66,7 @@
   let namesValue = $names.join('\n');
   let edgesValue = '';
   let edgesHead = '';
-  setEx(exs[1]);
+  setEx(exs[0]);
   $: $adjacent = parseAdjacent(adjacentValue);
   $: $names = namesValue.split('\n');
 
@@ -101,6 +101,11 @@
     }
   })();
 
+  const acOtherId = idCntr.get();
+  const acOtherParId = idCntr.get();
+  const acNodesId = idCntr.get();
+  const acNodesParId = idCntr.get();
+
   function parseAdjacent(str: string) {
     return str.split('\n').map((item) => {
       const li = item.split(' ');
@@ -124,50 +129,10 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col">
-      <WrapRange
-        id={idCntr.get()}
-        lab="text width is"
-        step={1}
-        bind:value={$textWidth}
-        desc={$descTextWidth}
-      />
-    </div>
-    <div class="col">
-      <WrapRange
-        id={idCntr.get()}
-        lab="circle radius is"
-        step={1}
-        bind:value={$circleR}
-        desc={$descCircleR}
-      />
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <WrapRange
-        id={idCntr.get()}
-        lab="rect width is"
-        bind:value={$rectWidth}
-        max={150}
-        desc={$descRectWidth}
-      />
-    </div>
-    <div class="col">
-      <WrapRange
-        id={idCntr.get()}
-        lab="rect height is"
-        bind:value={$rectHeight}
-        max={150}
-        desc={$descRectHeight}
-      />
-    </div>
-  </div>
-  <div class="row">
     <div class="col-8">
       <WrapTextarea
         id={idCntr.get()}
-        lab="input edge pair"
+        lab="input node pairs of edges"
         bind:value={edgesValue}
         desc={$descEdges}
       />
@@ -175,39 +140,128 @@
     <div class="col-4">
       <WrapTextarea
         id={idCntr.get()}
-        lab="input head"
+        lab="input a top node name"
         bind:value={edgesHead}
         input={true}
         desc={$descEdges}
       />
     </div>
   </div>
-  <div class="row">
-    <button
-      class="btn btn-dark m-auto"
-      on:click|preventDefault={() => {
-        adjacentValue = stringOfAdjacent($adjacent);
-        namesValue = $names.join('\n');
-      }}>edge pair -&gt; adjacent nodes and names</button
-    >
+  <div class="accordion">
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <button
+          class="accordion-button collapsed"
+          type="button"
+          id={acNodesParId}
+          data-bs-toggle="collapse"
+          data-bs-target="#{acNodesId}"
+          aria-expanded="false"
+          aria-controls={acNodesId}
+        >
+          Nodes' Settings
+        </button>
+      </div>
+      <div
+        class="accordion-collapse collapse"
+        id={acNodesId}
+        data-bs-parent="#{acNodesParId}"
+      >
+        <div class="accordion-body">
+          <div class="row">
+            <button
+              class="btn btn-dark m-auto"
+              on:click|preventDefault={() => {
+                adjacentValue = stringOfAdjacent($adjacent);
+                namesValue = $names.join('\n');
+              }}>edge -&gt; adjacent nodes and names</button
+            >
+          </div>
+          <div class="row">
+            <WrapTextarea
+              id={idCntr.get()}
+              lab="input adjacent nodes"
+              bind:value={adjacentValue}
+              desc={$descAdjacent}
+            />
+          </div>
+          <div class="row">
+            <WrapTextarea
+              id={idCntr.get()}
+              lab="input nodes' names"
+              bind:value={namesValue}
+              desc={$descNames}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h3 class="accordion-header">
+        <button
+          class="accordion-button collapsed"
+          type="button"
+          id={acOtherParId}
+          data-bs-toggle="collapse"
+          data-bs-target="#{acOtherId}"
+          aria-expanded="false"
+          aria-controls={acOtherId}>Other Settings</button
+        >
+      </h3>
+      <div
+        class="accordion-collapse collapse"
+        id={acOtherId}
+        data-bs-parent="#{acOtherParId}"
+      >
+        <div class="accordion-body">
+          <div class="row">
+            <div class="col">
+              <WrapRange
+                id={idCntr.get()}
+                lab="text width:"
+                step={1}
+                bind:value={$textWidth}
+                desc={$descTextWidth}
+              />
+            </div>
+            <div class="col">
+              <WrapRange
+                id={idCntr.get()}
+                lab="circle radius:"
+                step={1}
+                bind:value={$circleR}
+                desc={$descCircleR}
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <WrapRange
+                id={idCntr.get()}
+                lab="rect width:"
+                bind:value={$rectWidth}
+                max={150}
+                desc={$descRectWidth}
+              />
+            </div>
+            <div class="col">
+              <WrapRange
+                id={idCntr.get()}
+                lab="rect height:"
+                bind:value={$rectHeight}
+                max={150}
+                desc={$descRectHeight}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="row">
-    <WrapTextarea
-      id={idCntr.get()}
-      lab="input adjacent nodes"
-      bind:value={adjacentValue}
-      desc={$descAdjacent}
-    />
-  </div>
-  <div class="row">
-    <WrapTextarea
-      id={idCntr.get()}
-      lab="input nodes names"
-      bind:value={namesValue}
-      desc={$descNames}
-    />
-  </div>
-  <div class="row">
+    {#if exs.length}
+      <span style="width:fit-content">set sample input:</span>
+    {/if}
     {#each exs as ex, i}
       <button
         class="btn btn-secondary me-2"
@@ -252,10 +306,11 @@
 </div>
 
 <style>
-  .row {
+  .row,
+  .accordion {
     margin-top: 1em;
   }
-  button {
+  button:not([class~='accordion-button']) {
     width: fit-content;
   }
 </style>

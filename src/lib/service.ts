@@ -29,3 +29,4 @@ export const descAdjacent = readable(idCntr.get());
 export const descNames = readable(idCntr.get());
 export const descDownload = readable(idCntr.get());
 export const descEdges = readable(idCntr.get());
+export const descSvg = readable(idCntr.get());

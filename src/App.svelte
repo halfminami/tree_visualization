@@ -1,8 +1,9 @@
 <script lang="ts">
+  import DescLink from './comp/DescLink.svelte';
   import Controls from './lib/Controls.svelte';
   import Description from './lib/Description.svelte';
   import DrawTree from './lib/DrawTree.svelte';
-  import { idCntr } from './lib/service';
+  import { descSvg, idCntr } from './lib/service';
 
   const formId = idCntr.get();
   const headingId = idCntr.get();
@@ -18,9 +19,9 @@
 
 <main class="container my-5">
   <section>
-    <h1>Draw Tree with SVG</h1>
-    <div class="m-auto" style="width: fit-content;">
-      <output form={formId}>
+    <h1>Draw Tree with SVG <DescLink id={$descSvg} /></h1>
+    <div class="m-auto my-3 svgwrap">
+      <output form={formId} class="svg m-auto d-block">
         <DrawTree bind:self={svgEl} labelledBy={headingId} />
       </output>
     </div>
@@ -50,3 +51,20 @@
     </ul>
   </nav>
 </footer>
+
+<style>
+  .svg,
+  .svgwrap {
+    border: 0.2rem dotted gray;
+  }
+  .svgwrap {
+    background-color: ghostwhite;
+    height: 70svh;
+    width: 100%;
+    overflow: auto;
+  }
+  .svg {
+    width: fit-content;
+    height: fit-content;
+  }
+</style>
