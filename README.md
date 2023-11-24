@@ -39,4 +39,5 @@ opam install ./ --deps-only
 ```bash
 # on ./ (root)
 npm run build:ocaml
+# will put javascript build output into ./public
 ```
