@@ -1,4 +1,4 @@
-import { readable, writable } from 'svelte/store';
+import { writable } from 'svelte/store';
 
 export const rectWidth = writable(80);
 export const rectHeight = writable(80);
@@ -21,12 +21,14 @@ class IdCntr {
 
 export const idCntr = new IdCntr(0);
 
-export const descTextWidth = readable(idCntr.get());
-export const descCircleR = readable(idCntr.get());
-export const descRectWidth = readable(idCntr.get());
-export const descRectHeight = readable(idCntr.get());
-export const descAdjacent = readable(idCntr.get());
-export const descNames = readable(idCntr.get());
-export const descDownload = readable(idCntr.get());
-export const descEdges = readable(idCntr.get());
-export const descSvg = readable(idCntr.get());
+export const descTextWidth = writable('');
+export const descCircleR = writable('');
+export const descRectWidth = writable('');
+export const descRectHeight = writable('');
+export const descAdjacent = writable('');
+export const descNames = writable('');
+export const descDownload = writable('');
+export const descEdges = writable('');
+export const descSvg = writable('');
+export const descResize = writable('');
+export const descQuestion = writable('');

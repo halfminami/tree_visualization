@@ -2,7 +2,7 @@
   import DescLink from '../comp/DescLink.svelte';
   import WrapRange from '../comp/WrapRange.svelte';
   import WrapTextarea from '../comp/WrapTextarea.svelte';
-  import { makeAdjacent } from './makeAdjacent';
+  import { makeAdjacent, examples } from './makeAdjacent';
   import {
     rectWidth,
     rectHeight,
@@ -21,52 +21,12 @@
     descEdges,
   } from './service';
 
-  const exs: { edges: [string, string][]; head: string }[] = [
-    { edges: [['0', '1']], head: '0' },
-    {
-      edges: [
-        ['0', '1'],
-        ['1', '2'],
-        ['2', '3'],
-        ['2', '4'],
-        ['2', '5'],
-        ['3', '6'],
-        ['4', '7'],
-        ['5', '8'],
-        ['6', '9'],
-        ['6', '10'],
-        ['6', '11'],
-        ['8', '12'],
-        ['8', '13'],
-      ],
-      head: '0',
-    },
-    {
-      edges: [
-        ['1', '4'],
-        ['1', '5'],
-        ['1', '13'],
-        ['5', '8'],
-        ['13', '2'],
-        ['13', '3'],
-        ['3', '6'],
-        ['3', '7'],
-        ['7', '9'],
-        ['7', '10'],
-        ['7', '11'],
-        ['7', '12'],
-        ['7', '0'],
-      ],
-      head: '13',
-    },
-  ];
-
   export let svgEl: SVGSVGElement;
   let adjacentValue = stringOfAdjacent($adjacent);
   let namesValue = $names.join('\n');
   let edgesValue = '';
   let edgesHead = '';
-  setEx(exs[0]);
+  setEx(examples[1]);
   $: $adjacent = parseAdjacent(adjacentValue);
   $: $names = namesValue.split('\n');
 
@@ -174,7 +134,7 @@
               on:click|preventDefault={() => {
                 adjacentValue = stringOfAdjacent($adjacent);
                 namesValue = $names.join('\n');
-              }}>edge -&gt; adjacent nodes and names</button
+              }}>edges -&gt; adjacent nodes and names</button
             >
           </div>
           <div class="row">
@@ -259,10 +219,10 @@
     </div>
   </div>
   <div class="row">
-    {#if exs.length}
+    {#if examples.length}
       <span style="width:fit-content">set sample input:</span>
     {/if}
-    {#each exs as ex, i}
+    {#each examples as ex, i}
       <button
         class="btn btn-secondary me-2"
         on:click|preventDefault={() => {

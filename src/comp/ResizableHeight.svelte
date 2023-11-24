@@ -4,6 +4,8 @@
   let parentClass: string = '';
   export { parentClass as class };
 
+  export let resizeLabelId: string;
+
   let main: HTMLDivElement | null = null;
   let bottom: HTMLDivElement | null = null;
   let isMouseDown = false;
@@ -44,6 +46,7 @@
     tabindex="-1"
     on:mousedown={() => (isMouseDown = true)}
     bind:this={bottom}
+    aria-labelledby={resizeLabelId}
   ></div>
 </div>
 

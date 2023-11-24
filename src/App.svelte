@@ -4,13 +4,12 @@
   import Controls from './lib/Controls.svelte';
   import Description from './lib/Description.svelte';
   import DrawTree from './lib/DrawTree.svelte';
-  import { descSvg, idCntr } from './lib/service';
+  import { descSvg, idCntr, descResize } from './lib/service';
 
   const formId = idCntr.get();
   const headingId = idCntr.get();
 
   let resizeHeight: number | undefined;
-  $: console.log(resizeHeight);
 
   let svgEl: SVGSVGElement;
 </script>
@@ -24,7 +23,11 @@
 <main class="container my-5">
   <section>
     <h1>Draw Tree with SVG <DescLink id={$descSvg} /></h1>
-    <ResizableHeight class="m-auto my-3" bind:height={resizeHeight}>
+    <ResizableHeight
+      class="m-auto my-3"
+      bind:height={resizeHeight}
+      resizeLabelId={$descResize}
+    >
       <div
         class="svgwrap"
         style="height:{resizeHeight == undefined
@@ -47,7 +50,6 @@
 
 <aside>
   <section class="container my-5">
-    <h1>Description</h1>
     <Description />
   </section>
 </aside>
@@ -69,6 +71,9 @@
   .svg,
   .svgwrap {
     border: 0.2rem dotted gray;
+  }
+  .svgwrap {
+    border-style: solid;
   }
   .svgwrap {
     background-color: ghostwhite;
