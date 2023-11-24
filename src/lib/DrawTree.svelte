@@ -6,16 +6,17 @@
     textWidth,
     names,
     adjacent,
+    statusLog,
   } from './service';
 
   $: treeObj = (() => {
     let r: { vertices: [number, number][]; edges: [number, number][] };
     try {
       r = window.treeGrid.main()($adjacent);
+      $statusLog = 'Done!';
     } catch (e) {
       r = { vertices: [[0, 0]], edges: [] };
-      // TODO: inform the input is invalid
-      console.log('maybe the tree is invalid');
+      $statusLog = 'The tree of adjacent nodes may be invalid';
     }
     return r;
   })();

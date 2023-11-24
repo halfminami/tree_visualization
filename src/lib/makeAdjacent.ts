@@ -26,21 +26,20 @@ export function makeAdjacent(
       adjacentNodes[left].push(right);
       adjacentNodes[right].push(left);
     } else {
-      throw new Error('the tree may not be connected');
+      throw new Error('The tree may not be connected or looped');
     }
   });
 
   const idx = namesToIndx.get(head);
   if (adjacentNodes.length > namesToIndx.size) {
     // not a tree
-    // return { names: ['0'], adjacent: [[]] };
-    throw new Error('the tree may not be connected');
+    throw new Error('The tree may not be connected or looped');
   }
   if (adjacentNodes.length < namesToIndx.size) {
-    throw new Error('the tree may have a loop');
+    throw new Error('The tree may have a loop');
   }
   if (idx == undefined) {
-    throw new Error('head node must exist');
+    throw new Error('Top node must be present');
   }
 
   // map -> array

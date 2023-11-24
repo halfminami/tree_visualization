@@ -7,6 +7,8 @@ export const textWidth = writable(30);
 export const names = writable<string[]>(['0', '1']);
 export const adjacent = writable<number[][]>([[1], []]);
 
+export const statusLog = writable('log will appear here');
+
 class IdCntr {
   #id;
   constructor(n: number) {

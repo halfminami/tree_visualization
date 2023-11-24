@@ -19,6 +19,7 @@
     descNames,
     descDownload,
     descEdges,
+    statusLog,
   } from './service';
 
   export let svgEl: SVGSVGElement;
@@ -50,14 +51,14 @@
         made = makeAdjacent(mp, edgesHead);
       } catch (e) {
         let err = e as Error;
-        console.log(err.message);
+        $statusLog = err.message;
         return;
       }
       $adjacent = made.adjacent;
       $names = made.names;
+      $statusLog = 'Done!';
     } else {
-      // TODO: inform invalid
-      console.log('edge pair must contain one space');
+      $statusLog = 'Edge pair must contain one space';
     }
   })();
 
@@ -260,6 +261,9 @@
             }
           }}>download svg</button
         ><DescLink id={$descDownload} className="ms-2" />
+      </div>
+      <div class="col text-end">
+        <output>{$statusLog}</output>
       </div>
     </div>
   {/if}
