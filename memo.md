@@ -19,7 +19,7 @@ using a language other than JavaScript within a browser is enjoyable and surpris
 To find the centered positions of tree nodes, the algorithm (ocaml code) follows these steps:
 
 1. Left Alignment (DFS):
-- Utilized Depth-First Search (DFS) with return values to position nodes to the left. This takes into account the width of other nodes during this left alignment.
+    - Utilized Depth-First Search (DFS) with return values to position nodes to the left. This takes into account the width of other nodes during this left alignment.
 1. Center Alignment (BFS with Stack):
-- After left alignment, the algorithm centers the nodes from the bottom left by referencing the positions of their children.
-  - Implements a stack and pushes nodes in a right-to-left order using Breadth-First Search (BFS) to traverse like this.
+    - After left alignment, the algorithm centers the nodes from the bottom left by referencing the positions of their children.
+      - Implements a stack and pushes nodes in a right-to-left order using Breadth-First Search (BFS) to traverse like this.
