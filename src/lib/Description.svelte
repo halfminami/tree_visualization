@@ -29,11 +29,11 @@
   $descEdges = idCntr.get();
 </script>
 
-<h1 id={$descQuestion}>Description</h1>
+<h1 id={$descQuestion} tabindex="-1">Description</h1>
 <p>Draws undirected tree into a downloadable svg file.</p>
 <!-- controls desc -->
 
-<h2 id={$descSvg}>SVG View</h2>
+<h2 id={$descSvg} tabindex="-1">SVG View</h2>
 <p>Generates SVG representing a tree graph.</p>
 <dl>
   <dt>Outer Border (solid)</dt>
@@ -41,10 +41,10 @@
   <dt>Inner Border (dotted)</dt>
   <dd>Indicates the size of the SVG.</dd>
   <dt>Bottom Box Area (gray)</dt>
-  <dd id={$descResize}>Adjusts the height of the SVG View.</dd>
+  <dd id={$descResize} tabindex="-1">Adjusts the height of the SVG View.</dd>
 </dl>
 
-<h2 id={$descEdges}>Edge Input</h2>
+<h2 id={$descEdges} tabindex="-1">Edge Input</h2>
 <p>Enter edges represented by pairs of node names.</p>
 <dl>
   <dt>Pairs of Edges</dt>
@@ -66,13 +66,13 @@
   folded in the accordion.
 </p>
 <dl>
-  <dt id={$descAdjacent}>Adjacent Nodes</dt>
+  <dt id={$descAdjacent} tabindex="-1">Adjacent Nodes</dt>
   <dd>
     Define nodes on each line, starting from index 0. Each node is represented
     by its line index. Multiple nodes on the same line are separated by a space.
     Ensure there are one or more empty lines to represent tree leaves.
   </dd>
-  <dt id={$descNames}>Nodes' Names</dt>
+  <dt id={$descNames} tabindex="-1">Nodes' Names</dt>
   <dd>
     Names are assigned based on the corresponding index in the adjacency list.
     To try renaming, click the convert button first to get an adjacency list
@@ -87,26 +87,26 @@
   the accordion.
 </p>
 <dl>
-  <dt id={$descTextWidth}>Text Width</dt>
+  <dt id={$descTextWidth} tabindex="-1">Text Width</dt>
   <dd>Adjust the width of the node name text.</dd>
-  <dt id={$descCircleR}>Circle Radius</dt>
+  <dt id={$descCircleR} tabindex="-1">Circle Radius</dt>
   <dd>
     Modify the circle radius of the nodes. Note that this does not affect the
     spacing between nodes.
   </dd>
-  <dt id={$descRectWidth}>Rect Width</dt>
+  <dt id={$descRectWidth} tabindex="-1">Rect Width</dt>
   <dd>
     Alter the horizontal spacing between nodes. Nodes' circles are positioned at
     the center of the rectangle.
   </dd>
-  <dt id={$descRectHeight}>Rect Height</dt>
+  <dt id={$descRectHeight} tabindex="-1">Rect Height</dt>
   <dd>
     Adjust the vertical spacing between nodes. Nodes' circles are centered
     within the rectangle.
   </dd>
 </dl>
 
-<h2 id={$descDownload}>Download SVG</h2>
+<h2 id={$descDownload} tabindex="-1">Download SVG</h2>
 <p>
   Download an SVG file of the tree. Some visual aspects are defined in the
   <code>&lt;style&gt;</code>, allowing you to make further adjustments if
@@ -117,5 +117,8 @@
   p,
   dl {
     margin-left: 0.6em;
+  }
+  *:focus {
+    background-color: ghostwhite;
   }
 </style>

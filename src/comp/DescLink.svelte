@@ -9,5 +9,6 @@
 <a
   href="#{id}"
   class="link-secondary link-underline-opacity-25 {className}"
+  on:click={() => document.getElementById(id)?.focus()}
   aria-labelledby={$descQuestion}>{text}</a
 >
