@@ -49,7 +49,7 @@
 </main>
 
 <aside>
-  <section class="container my-5">
+  <section class="container my-5 py-3 border-top border-bottom">
     <Description />
   </section>
 </aside>
@@ -60,7 +60,7 @@
       <li class="navi-item">
         <a
           href="https://github.com/halfminami/tree_visualization"
-          class="nav-link">this repo</a
+          class="nav-link">Github Repository</a
         >
       </li>
     </ul>
