@@ -2,6 +2,8 @@
 
 Draws tree into an SVG file.
 
+![screenshot](./tree-visualization-screenshot.png)
+
 ## Uses
 
 - Js_of_ocaml, which compiles Ocaml to JavaScript.
