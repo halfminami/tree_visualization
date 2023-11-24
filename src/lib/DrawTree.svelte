@@ -63,7 +63,7 @@
 
     <path
       class="edge"
-      d="M{parentP[0]} {parentP[1]}, L{childP[0]} {childP[1]}"
+      d="M{parentP[0]} {parentP[1]} L{childP[0]} {childP[1]}"
     />
   {/each}
   {#each nodePoss as pos}
